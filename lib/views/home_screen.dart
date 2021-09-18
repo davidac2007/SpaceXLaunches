@@ -1,6 +1,7 @@
 import 'package:app_lanzamientos/models/launches.dart';
 import 'package:app_lanzamientos/services/fetch_launches.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'widgets/spacex_logo.dart';
 
@@ -56,9 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
             : ListView.builder(
                 itemCount: launchesList.length,
                 itemBuilder: (context, index) {
+                  DateTime launchDate = launchesList[index].dateLocal!;
+                  String launchDetails = launchesList[index].details.toString();
                   return Container(
-                    padding: const EdgeInsets.all(20.0),
-                    height: 300,
+                    padding: const EdgeInsets.all(10.0),
+                    // height: 300,
                     child: Card(
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
@@ -67,49 +70,53 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         color: Colors.black,
                         child: Container(
-                          padding: const EdgeInsets.all(10.0),
-                          height: 150,
+                          padding: const EdgeInsets.all(20.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                                color: Colors.white,
-                                width: 50.0,
-                                height: 50.0,
-                                child: Image(
-                                    image: NetworkImage(launchesList[index]
-                                        .links!
-                                        .patch!
-                                        .small!)),
-                              ),
+                                  padding: const EdgeInsets.all(5.0),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.circular(15.0)),
+                                  width: 80.0,
+                                  height: 80.0,
+                                  child: Image.network(
+                                    launchesList[index].links!.patch!.small!,
+                                    errorBuilder:
+                                        (context, exception, stackTrace) {
+                                      return const Text('Error');
+                                    },
+                                  )),
                               const SizedBox(
                                 width: 20.0,
                               ),
                               Flexible(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
                                       launchesList[index].name.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 15.0,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      "Fecha de lanzamiento: ${launchDate.day.toString()}/${launchDate.month.toString()}/${launchDate.year.toString()} ",
                                       style:
                                           const TextStyle(color: Colors.white),
                                     ),
                                     Text(
-                                      launchesList[index].dateLocal.toString(),
+                                      launchDetails == "null"
+                                          ? "No hay detalles disponibles"
+                                          : launchDetails,
+                                      textAlign: TextAlign.justify,
                                       style:
                                           const TextStyle(color: Colors.white),
                                     ),
                                     Text(
-                                      launchesList[index].details.toString(),
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                    Text(
-                                      launchesList[index]
-                                          .flightNumber
-                                          .toString(),
+                                      "Número de vuelo: ${launchesList[index].flightNumber.toString()}",
                                       style:
                                           const TextStyle(color: Colors.white),
                                     )

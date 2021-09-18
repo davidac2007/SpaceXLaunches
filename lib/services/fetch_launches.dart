@@ -15,9 +15,6 @@ class LaunchesService {
           json.decode(str).map((x) => Launches.fromJson(x)));
 
       final launches = getLaunches(response.body);
-      print(response.body);
-      print(launches[0].links!.patch!.small);
-
       return launches;
     } else {
       throw Exception('Failed to load launches');
