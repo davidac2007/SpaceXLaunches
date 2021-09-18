@@ -56,8 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
             : ListView.builder(
                 itemCount: launchesList.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
+                  return Container(
+                    padding: const EdgeInsets.all(20.0),
+                    height: 300,
                     child: Card(
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
@@ -68,9 +69,54 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           padding: const EdgeInsets.all(10.0),
                           height: 150,
-                          child: Text(
-                            launchesList[index].name.toString(),
-                            style: const TextStyle(color: Colors.white),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                color: Colors.white,
+                                width: 50.0,
+                                height: 50.0,
+                                child: Image(
+                                    image: NetworkImage(launchesList[index]
+                                        .links!
+                                        .patch!
+                                        .small!)),
+                              ),
+                              const SizedBox(
+                                width: 20.0,
+                              ),
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      launchesList[index].name.toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      launchesList[index].dateLocal.toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      launchesList[index].details.toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      launchesList[index]
+                                          .flightNumber
+                                          .toString(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         )),
                   );
