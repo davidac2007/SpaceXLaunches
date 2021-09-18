@@ -75,11 +75,28 @@ class HomeScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.black,
       ),
-      body: const Center(
-          child: Text(
-        "Home page",
-        textScaleFactor: 2,
-      )),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Card(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16.0),
+                  ),
+                ),
+                color: Colors.black,
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  height: 150,
+                  child: const Text(
+                    "Card 1",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )),
+          ),
+        ],
+      ),
     );
   }
 }
