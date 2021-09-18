@@ -1,14 +1,3 @@
-// To parse this JSON data, do
-//
-//     final welcome = welcomeFromJson(jsonString);
-
-// ignore_for_file: constant_identifier_names
-
-import 'dart:convert';
-
-List<Launches> welcomeFromJson(String str) =>
-    List<Launches>.from(json.decode(str).map((x) => Launches.fromJson(x)));
-
 class Launches {
   Launches(
       {this.fairings,
@@ -68,9 +57,9 @@ class Launches {
   String? id;
 
   factory Launches.fromJson(Map<String, dynamic> json) => Launches(
-        fairings: json["fairings"] == null
+        fairings: json["fairings[0]"] == null
             ? null
-            : Fairings.fromJson(json["fairings"]),
+            : Fairings.fromJson(json["fairings"[0]]),
         links: Links.fromJson(json["links"]),
         staticFireDateUtc: json["static_fire_date_utc"] == null
             ? null
@@ -90,9 +79,9 @@ class Launches {
         launchpad: launchpadValues.map![json["launchpad"]],
         flightNumber: json["flight_number"],
         name: json["name"],
-        dateUtc: DateTime.parse(json["date_utc"]),
+        dateUtc: DateTime.parse(json["date_utc"].toString()),
         dateUnix: json["date_unix"],
-        dateLocal: DateTime.parse(json["date_local"]),
+        dateLocal: DateTime.parse(json["date_local"].toString()),
         datePrecision: datePrecisionValues.map![json["date_precision"]],
         upcoming: json["upcoming"],
         cores: List<Core>.from(json["cores"].map((x) => Core.fromJson(x))),
@@ -103,7 +92,7 @@ class Launches {
       );
 
   Map<String, dynamic> toJson() => {
-        "fairings": fairings == null ? null : fairings!.toJson(),
+        "fairings": fairings!.toJson(),
         "links": links!.toJson(),
         "static_fire_date_utc": staticFireDateUtc == null
             ? null
