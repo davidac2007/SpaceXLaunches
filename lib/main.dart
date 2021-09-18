@@ -1,7 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const App());
 }
 
@@ -10,11 +17,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Splash Screen',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
@@ -42,15 +46,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        child: const Center(
+        child: Center(
             child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Image(
-            image: NetworkImage(
-                // Sorry I had to change the URL since the other one wasn't working fine.
-                "https://www.pngfind.com/pngs/b/687-6876191_spacex-png.png"),
-          ),
-        )));
+                padding: const EdgeInsets.all(20.0), child: spaceXLogo())));
   }
 }
 
@@ -60,7 +58,23 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("SpaceX")),
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.only(
+              top: 20, left: 100.0, right: 80.0, bottom: 40.0),
+          child: Column(
+            children: [
+              spaceXLogo(),
+              Text(
+                "Lanzamientos",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.lightBlue[900]),
+              )
+            ],
+          ),
+        ),
+        backgroundColor: Colors.black,
+      ),
       body: const Center(
           child: Text(
         "Home page",
@@ -68,4 +82,12 @@ class HomeScreen extends StatelessWidget {
       )),
     );
   }
+}
+
+Widget spaceXLogo() {
+  return const Image(
+    image: NetworkImage(
+        // Sorry, I had to change the URL since the other one wasn't working fine.
+        "https://www.pngfind.com/pngs/b/687-6876191_spacex-png.png"),
+  );
 }
