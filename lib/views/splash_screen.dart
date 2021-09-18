@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:app_lanzamientos/services/fetch_launches.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
@@ -16,7 +15,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    fetchLaunches();
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,

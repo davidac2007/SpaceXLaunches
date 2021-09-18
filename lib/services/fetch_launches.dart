@@ -10,12 +10,15 @@ Future<List<Launches>> fetchLaunches() async {
   if (response.statusCode == 200) {
     print("hey");
 
-    List<Launches> welcomeFromJson(String str) =>
+    List<Launches> getLaunches(String str) =>
         List<Launches>.from(json.decode(str).map((x) => Launches.fromJson(x)));
 
-    final launches = welcomeFromJson(response.body);
+    final launches = getLaunches(response.body);
     print(response.body);
-    print(launches[0].name);
+    print(launches[0].links!.patch!.small);
+
+    Stream<List<Launches>> launchesStream = Stream.fromFuture(fetchLaunches());
+
     return launches;
   } else {
     throw Exception('Failed to load launches');
