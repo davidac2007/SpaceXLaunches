@@ -19,6 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
   LaunchesService client = LaunchesService();
 
   @override
+  void dispose() {
+    super.dispose();
+    PaintingBinding.instance!.imageCache!.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -31,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(
                   "Lanzamientos",
                   style: TextStyle(
+                      fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.lightBlue[900]),
                 )

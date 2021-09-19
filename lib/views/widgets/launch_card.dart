@@ -1,4 +1,6 @@
 import 'package:app_lanzamientos/models/launches.dart';
+import 'package:app_lanzamientos/views/widgets/launch_image.dart';
+import 'package:app_lanzamientos/views/widgets/launch_info.dart';
 import 'package:flutter/material.dart';
 
 class LaunchCard extends StatelessWidget {
@@ -11,7 +13,7 @@ class LaunchCard extends StatelessWidget {
         child: Card(
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(16.0),
+                Radius.circular(20.0),
               ),
             ),
             color: Colors.black,
@@ -19,78 +21,12 @@ class LaunchCard extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: [
-                    Container(
-                        padding: const EdgeInsets.all(5.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15.0)),
-                        width: 100.0,
-                        height: 100.0,
-                        child: Image.network(
-                          launch.links?.patch?.small ?? "",
-                          errorBuilder: (context, child, stackTrace) {
-                            return const Center(
-                                child: Flexible(
-                              child: Text(
-                                "NO HAY IMAGEN DISPONIBLE",
-                                textAlign: TextAlign.center,
-                              ),
-                            ));
-                          },
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) {
-                              return child;
-                            }
-                            return const Center(
-                                child: CircularProgressIndicator(
-                              color: Colors.black,
-                              strokeWidth: 5.0,
-                            ));
-                          },
-                        )),
+                    LaunchImage(launch),
                     const SizedBox(
                       width: 20.0,
                     ),
-                    Flexible(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            launch.name!,
-                            style: const TextStyle(
-                                fontSize: 18.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          separator(),
-                          Text(
-                            "Fecha de lanzamiento: ${launch.dateLocal?.day.toString()}/${launch.dateLocal?.month.toString()}/${launch.dateLocal?.year.toString()} ",
-                            style: const TextStyle(
-                                fontSize: 16.0, color: Colors.white),
-                          ),
-                          separator(),
-                          Text(
-                            launch.details == null
-                                ? "No hay detalles"
-                                : "Detalles: ${launch.details!}",
-                            textAlign: TextAlign.justify,
-                            style: const TextStyle(
-                                fontSize: 16.0, color: Colors.white),
-                          ),
-                          separator(),
-                          Text(
-                            "Número de vuelo: ${launch.flightNumber.toString()}",
-                            style: const TextStyle(
-                                fontSize: 16.0, color: Colors.white),
-                          )
-                        ],
-                      ),
-                    ),
+                    LaunchInfo(launch)
                   ],
                 ))));
-  }
-
-  Widget separator() {
-    return const SizedBox(height: 5.0);
   }
 }
