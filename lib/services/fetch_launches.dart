@@ -9,8 +9,6 @@ class LaunchesService {
         await http.get(Uri.parse('https://api.spacexdata.com/v4/launches'));
 
     if (response.statusCode == 200) {
-      print("hey");
-
       List<Launches> getLaunches(String str) => List<Launches>.from(
           json.decode(str).map((x) => Launches.fromJson(x)));
 
