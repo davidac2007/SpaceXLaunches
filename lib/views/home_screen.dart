@@ -21,6 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
     getLaunches();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    PaintingBinding.instance!.imageCache?.clear();
+  }
+
   void getLaunches() {
     LaunchesService().fetchLaunches().then((launches) => {
           setState(() {
@@ -52,13 +58,22 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.black,
         ),
         body: isLoading
-            ? const Center(
-                child: CircularProgressIndicator(color: Colors.black))
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    CircularProgressIndicator(color: Colors.black),
+                    SizedBox(height: 5.0),
+                    Text("Loading launches")
+                  ],
+                ),
+              )
             : ListView.builder(
                 itemCount: launchesList.length,
                 itemBuilder: (context, index) {
                   DateTime launchDate = launchesList[index].dateLocal!;
                   String launchDetails = launchesList[index].details.toString();
+
                   return Container(
                     padding: const EdgeInsets.all(10.0),
                     // height: 300,
@@ -82,21 +97,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 80.0,
                                   height: 80.0,
                                   child: Image.network(
-                                    launchesList[index].links!.patch!.small!,
+                                    launchesList[index].links?.patch?.small ??
+                                        "",
+                                    errorBuilder: (context, child, stackTrace) {
+                                      return const Center(
+                                          child: Text(
+                                        "NO HAY IMAGEN",
+                                        textAlign: TextAlign.center,
+                                      ));
+                                    },
                                     loadingBuilder:
                                         (context, child, loadingProgress) {
                                       if (loadingProgress == null) return child;
-                                      return const Center(
+                                      return Center(
                                         child: CircularProgressIndicator(
-                                            // value: loadingProgress
-                                            //             .expectedTotalBytes !=
-                                            //         null
-                                            //     ? loadingProgress
-                                            //             .cumulativeBytesLoaded /
-                                            //         loadingProgress
-                                            //             .expectedTotalBytes!
-                                            //     : null,
-                                            ),
+                                          value: loadingProgress
+                                                      .expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                        ),
                                       );
                                     },
                                   )),
