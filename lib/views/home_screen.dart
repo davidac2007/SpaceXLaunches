@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     errorBuilder: (context, child, stackTrace) {
                                       return const Center(
                                           child: Text(
-                                        "NO HAY IMAGEN",
+                                        "NO HAY IMAGEN DISPONIBLE",
                                         textAlign: TextAlign.center,
                                       ));
                                     },
