@@ -1,6 +1,6 @@
 import 'package:app_lanzamientos/models/launches.dart';
-import 'package:app_lanzamientos/views/widgets/launch_image.dart';
-import 'package:app_lanzamientos/views/widgets/launch_info.dart';
+import 'package:app_lanzamientos/views/widgets/card/launch_image.dart';
+import 'package:app_lanzamientos/views/widgets/card/launch_info.dart';
 import 'package:flutter/material.dart';
 
 class LaunchCard extends StatelessWidget {

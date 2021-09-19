@@ -16,11 +16,9 @@ class LaunchImage extends StatelessWidget {
           launch.links?.patch?.small ?? "",
           errorBuilder: (context, child, stackTrace) {
             return const Center(
-                child: Flexible(
-              child: Text(
-                "NO HAY IMAGEN DISPONIBLE",
-                textAlign: TextAlign.center,
-              ),
+                child: Text(
+              "NO HAY IMAGEN DISPONIBLE",
+              textAlign: TextAlign.center,
             ));
           },
           loadingBuilder: (context, child, loadingProgress) {

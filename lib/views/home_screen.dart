@@ -1,6 +1,6 @@
 import 'package:app_lanzamientos/models/launches.dart';
 import 'package:app_lanzamientos/services/fetch_launches.dart';
-import 'package:app_lanzamientos/views/widgets/launch_card.dart';
+import 'package:app_lanzamientos/views/widgets/card/launch_card.dart';
 import 'package:app_lanzamientos/views/widgets/spinning_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
