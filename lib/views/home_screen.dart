@@ -83,9 +83,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 80.0,
                                   child: Image.network(
                                     launchesList[index].links!.patch!.small!,
-                                    errorBuilder:
-                                        (context, exception, stackTrace) {
-                                      return const Text('Error');
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return const Center(
+                                        child: CircularProgressIndicator(
+                                            // value: loadingProgress
+                                            //             .expectedTotalBytes !=
+                                            //         null
+                                            //     ? loadingProgress
+                                            //             .cumulativeBytesLoaded /
+                                            //         loadingProgress
+                                            //             .expectedTotalBytes!
+                                            //     : null,
+                                            ),
+                                      );
                                     },
                                   )),
                               const SizedBox(
