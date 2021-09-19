@@ -4,13 +4,13 @@ import 'package:app_lanzamientos/models/launches.dart';
 import 'package:http/http.dart' as http;
 
 class LaunchesService {
-  Future<List<Launches>> fetchLaunches() async {
+  Future<List<Launch>> fetchLaunches() async {
     final response =
         await http.get(Uri.parse('https://api.spacexdata.com/v4/launches'));
 
     if (response.statusCode == 200) {
-      List<Launches> getLaunches(String str) => List<Launches>.from(
-          json.decode(str).map((x) => Launches.fromJson(x)));
+      List<Launch> getLaunches(String str) =>
+          List<Launch>.from(json.decode(str).map((x) => Launch.fromJson(x)));
 
       final launches = getLaunches(response.body);
       return launches;

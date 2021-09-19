@@ -40,9 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
         body: FutureBuilder(
             future: client.fetchLaunches(),
             builder:
-                (BuildContext context, AsyncSnapshot<List<Launches>> snapshot) {
+                (BuildContext context, AsyncSnapshot<List<Launch>> snapshot) {
               if (snapshot.hasData) {
-                List<Launches>? launchesList = snapshot.data;
+                List<Launch>? launchesList = snapshot.data;
 
                 return ListView.builder(
                     itemCount: launchesList?.length,

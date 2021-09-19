@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
-class Launches {
-  Launches(
+class Launch {
+  Launch(
       {this.fairings,
       this.links,
       this.staticFireDateUtc,
@@ -58,7 +58,7 @@ class Launches {
   String? launchLibraryId;
   String? id;
 
-  factory Launches.fromJson(Map<String, dynamic> json) => Launches(
+  factory Launch.fromJson(Map<String, dynamic> json) => Launch(
         fairings: json["fairings[0]"] == null
             ? null
             : Fairings.fromJson(json["fairings"[0]]),
