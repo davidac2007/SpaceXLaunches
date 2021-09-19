@@ -11,6 +11,7 @@ class LaunchCard extends StatelessWidget {
     return Container(
         padding: const EdgeInsets.all(10.0),
         child: Card(
+            elevation: 15,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(20.0),

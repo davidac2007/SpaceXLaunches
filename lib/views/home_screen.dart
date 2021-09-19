@@ -32,16 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(
                 top: 20, left: 100.0, right: 80.0, bottom: 40.0),
             child: Column(
-              children: [
-                spaceXLogo(),
-                Text(
-                  "Lanzamientos",
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.lightBlue[900]),
-                )
-              ],
+              children: [spaceXLogo(), title()],
             ),
           ),
           backgroundColor: Colors.black,
@@ -61,5 +52,15 @@ class _HomeScreenState extends State<HomeScreen> {
               }
               return const SpinningLoader();
             }));
+  }
+
+  Widget title() {
+    return Text(
+      "Lanzamientos",
+      style: TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.lightBlue[900]),
+    );
   }
 }
