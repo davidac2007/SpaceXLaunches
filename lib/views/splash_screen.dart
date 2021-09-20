@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
-import 'widgets/spacex_logo.dart';
+import 'widgets/helpers/spacex_logo.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
