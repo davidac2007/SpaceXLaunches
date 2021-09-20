@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:app_lanzamientos/models/launches.dart';
 import 'package:app_lanzamientos/services/fetch_launches.dart';
 import 'package:app_lanzamientos/views/widgets/card/launch_card.dart';
 import 'package:app_lanzamientos/views/widgets/spinning_loader.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
@@ -37,20 +40,30 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           backgroundColor: Colors.black,
         ),
-        body: FutureBuilder(
-            future: client.fetchLaunches(),
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Launch>> snapshot) {
-              if (snapshot.hasData) {
-                List<Launch>? launchesList = snapshot.data;
+        body: StreamBuilder<Object>(
+            stream: Connectivity().onConnectivityChanged,
+            builder: (context, snapshot) {
+              if (snapshot.data != ConnectivityResult.none) {
+                return FutureBuilder(
+                    future: client.fetchLaunches(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Launch>> snapshot) {
+                      if (snapshot.hasData) {
+                        List<Launch>? launchesList = snapshot.data;
 
-                return ListView.builder(
-                    itemCount: launchesList?.length,
-                    itemBuilder: (context, index) {
-                      return LaunchCard(launchesList![index]);
+                        return ListView.builder(
+                            itemCount: launchesList?.length,
+                            itemBuilder: (context, index) {
+                              return LaunchCard(launchesList![index]);
+                            });
+                      }
+                      return const SpinningLoader();
                     });
+              } else {
+                return const Center(
+                  child: Text("NO NET"),
+                );
               }
-              return const SpinningLoader();
             }));
   }
 
