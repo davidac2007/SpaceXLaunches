@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(
                 top: 20, left: 100.0, right: 80.0, bottom: 40.0),
             child: Column(
-              children: [spaceXLogo(), title()],
+              children: [const SpaceXLogo(), title()],
             ),
           ),
           backgroundColor: Colors.black,
