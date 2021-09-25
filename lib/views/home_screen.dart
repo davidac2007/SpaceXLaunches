@@ -44,7 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
             stream: Connectivity().onConnectivityChanged,
             builder: (context, snapshot) {
               if (snapshot.data == ConnectivityResult.mobile ||
-                  snapshot.data == ConnectivityResult.wifi) {
+                  snapshot.data == ConnectivityResult.wifi ||
+                  snapshot.data != ConnectivityResult.none) {
                 return FutureBuilder(
                     future: client.fetchLaunches(),
                     builder: (BuildContext context,

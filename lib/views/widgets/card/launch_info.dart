@@ -29,7 +29,7 @@ class LaunchInfo extends StatelessWidget {
           separator(),
           styledText(
               "Detalles:\n",
-              launch.details != null ? "${launch.details}." : "No hay detalles",
+              launch.details != null ? "${launch.details}" : "No hay detalles",
               TextAlign.justify),
           separator(),
           styledText("Número de vuelo: ", launch.flightNumber.toString(),
